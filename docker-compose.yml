@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  node-app:
+    image: node-app-image
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/opt/app
+    command: npm start
+    depends_on:
+      - redis
+    environment:
+      NODE_ENV: development
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
